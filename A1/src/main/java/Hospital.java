@@ -7,8 +7,6 @@ public class Hospital {
 	private final HashMap<String, Patient> Patients;
 	static int numNewHospitals = 0;
 
-	static int tmp = 1;
-
 	/* Create the hospital according to the input file */
 	public Hospital(String p_HospitalID, Location p_loc, Capacity p_cap) {
 		this.HospitalID = p_HospitalID;
