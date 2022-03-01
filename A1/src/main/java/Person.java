@@ -1,72 +1,83 @@
 public class Person {
-    String IDCardNo;
-    private Location loc;
-    private String gender;
-    private int age;
-    private boolean isVac;
-    private int infectCnt;
+	String IDCardNo;
+	private Location loc;
+	private String gender;
+	private int age;
+	private boolean isVac;
+	private int infectCnt;
 
-    /* Class Constructor */
-    public Person(String p_IDCardNo, Location p_loc, String p_gender, int p_age, boolean p_isVac) {
-        //TODO
-    }
+	/* Class Constructor */
+	public Person(String p_IDCardNo, Location p_loc, String p_gender, int p_age, boolean p_isVac) {
+		IDCardNo = p_IDCardNo;
+		loc = p_loc;
+		gender = p_gender;
+		age = p_age;
+		isVac = p_isVac;
+		infectCnt = 0;
+	}
 
-    public void setIDCardNo(String p_IDCardNo) {
-        this.IDCardNo = p_IDCardNo;
-    }
+	public Person(Person p) {
+		this(p.IDCardNo, p.loc, p.gender, p.age, p.isVac);
+		infectCnt = p.infectCnt;
+	}
 
-    public void setLoc(Location p_loc) {
-        this.loc = p_loc;
-    }
+	public void setIDCardNo(String p_IDCardNo) {
+		this.IDCardNo = p_IDCardNo;
+	}
 
-    public void setGender(String p_gender) {
-        this.gender = p_gender;
-    }
+	public void setLoc(Location p_loc) {
+		this.loc = p_loc;
+	}
 
-    public void setAge(int p_age) {
-        this.age = p_age;
-    }
+	public void setGender(String p_gender) {
+		this.gender = p_gender;
+	}
 
-    public void setIsVac(Boolean p_isVac) {
-        this.isVac = p_isVac;
-    }
+	public void setAge(int p_age) {
+		this.age = p_age;
+	}
 
-    public void setInfectCnt(int p_infectCnt) {
-        this.infectCnt = p_infectCnt;
-    }
+	public void setIsVac(Boolean p_isVac) {
+		this.isVac = p_isVac;
+	}
 
-    public String getIDCardNo() {
-        return this.IDCardNo;
-    }
+	public void infected() {
+		++infectCnt;
+	}
 
-    public Location getLoc() {
-        return this.loc;
-    }
+	public String getIDCardNo() {
+		return this.IDCardNo;
+	}
 
-    public String getGender() {
-        return this.gender;
-    }
+	public Location getLoc() {
+		return this.loc;
+	}
 
-    public int getAge() {
-        return this.age;
-    }
+	public String getGender() {
+		return this.gender;
+	}
 
-    public boolean getIsVac() {
-        return this.isVac;
-    }
+	public int getAge() {
+		return this.age;
+	}
 
-    public int getInfectCnt() {
-        return this.infectCnt;
-    }
+	public boolean getIsVac() {
+		return this.isVac;
+	}
 
-    /* Dump the person info as a string */
-    public String toString() {
-        String str = "";
-        str += IDCardNo + "        ";
-        str += loc.xloc + "        " + loc.yloc + "        ";
-        str += gender + "        ";
-        str += age + "        ";
-        str += (isVac ? "Yes" : "No");
-        return str;
-    }
+	public int getInfectCnt() {
+		return this.infectCnt;
+	}
+
+	/* Dump the person info as a string */
+	@Override
+	public String toString() {
+		String str = "";
+		str += IDCardNo + "        ";
+		str += loc.xloc + "        " + loc.yloc + "        ";
+		str += gender + "        ";
+		str += age + "        ";
+		str += (isVac ? "Yes" : "No");
+		return str;
+	}
 }
