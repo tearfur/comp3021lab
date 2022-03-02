@@ -1,1 +1,0 @@
-If you want to test your code with the sample, please put the files in to the directories named data and output, respectively.
