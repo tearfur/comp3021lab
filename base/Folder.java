@@ -1,14 +1,16 @@
 package base;
 
-import java.sql.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Folder implements Comparable<Folder> {
+public class Folder implements Comparable<Folder>, Serializable {
 	private ArrayList<Note> notes;
 	private String name;
+
+	private static final long serialVersionUID = 1;
 
 	public Folder(String name) {
 		this.name = name;
@@ -36,7 +38,7 @@ public class Folder implements Comparable<Folder> {
 
 		for (Note note : notes) {
  			boolean add = false;
-			for (String and : keywords.toLowerCase(Locale.ENGLISH).split("(?<!or)\\s+(?!or)")) {
+			for (String and : keywords.trim().toLowerCase(Locale.ENGLISH).split("(?<!or)\\s+(?!or)")) {
 				add = false;
 				for (String or : and.split("\\s+or\\s+")) {
 					if (note.getTitle().toLowerCase(Locale.ENGLISH).contains(or) ||
