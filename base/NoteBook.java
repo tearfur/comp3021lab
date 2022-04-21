@@ -47,6 +47,16 @@ public class NoteBook implements Serializable {
 		return folders;
 	}
 
+	public boolean addFolder(String name) {
+		for (Folder folder : folders) {
+			if (folder.getName().equals(name))
+				return false;
+		}
+
+		folders.add(new Folder(name));
+		return true;
+	}
+
 	public boolean insertNote(String folderName, Note note) {
 		Folder f = null;
 

@@ -21,6 +21,10 @@ public class Folder implements Comparable<Folder>, Serializable {
 		notes.add(note);
 	}
 
+	public boolean deleteNote(String title) {
+		return notes.removeIf(note -> note.getTitle().equals(title));
+	}
+
 	public String getName() {
 		return name;
 	}
