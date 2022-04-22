@@ -30,10 +30,6 @@ import java.util.stream.Collectors;
  */
 public class NoteBookWindow extends Application {
 	/**
-	 * Stage
-	 */
-	Stage stage;
-	/**
 	 * TextArea containing the note
 	 */
 	final TextArea textAreaNote = new TextArea("");
@@ -45,6 +41,10 @@ public class NoteBookWindow extends Application {
 	 * Combobox for selecting the folder
 	 */
 	final ComboBox<String> foldersComboBox = new ComboBox<String>();
+	/**
+	 * Stage
+	 */
+	Stage stage;
 	/**
 	 * This is our Notebook object
 	 */
@@ -100,7 +100,8 @@ public class NoteBookWindow extends Application {
 			FileChooser chooser = new FileChooser();
 			chooser.setInitialDirectory(new File("."));
 			chooser.setTitle("Please choose a file which contains the notebook object");
-			chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serialised Object File (*.ser)", "*.ser"));
+			chooser.getExtensionFilters()
+				   .add(new FileChooser.ExtensionFilter("Serialised Object File (*.ser)", "*.ser"));
 
 			File f = chooser.showOpenDialog(stage);
 
@@ -115,7 +116,8 @@ public class NoteBookWindow extends Application {
 			FileChooser chooser = new FileChooser();
 			chooser.setInitialDirectory(new File("."));
 			chooser.setTitle("Save current notebook to file");
-			chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serialised Object File (*.ser)", "*.ser"));
+			chooser.getExtensionFilters()
+				   .add(new FileChooser.ExtensionFilter("Serialised Object File (*.ser)", "*.ser"));
 
 			File f = chooser.showSaveDialog(stage);
 
@@ -243,7 +245,8 @@ public class NoteBookWindow extends Application {
 								System.out.println("Pressed ok");
 						});
 					} else if (noteBook.createTextNote(currentFolder, rs)) {
-						Alert alert = new Alert(Alert.AlertType.INFORMATION, "Inserted " + rs + " to folder " + currentFolder + " successfully!");
+						Alert alert = new Alert(Alert.AlertType.INFORMATION,
+												"Inserted " + rs + " to folder " + currentFolder + " successfully!");
 						alert.showAndWait().ifPresent(type -> {
 							if (type == ButtonType.OK)
 								System.out.println("Pressed ok");
@@ -269,7 +272,8 @@ public class NoteBookWindow extends Application {
 	}
 
 	private void updateComboBox() {
-		foldersComboBox.getItems().setAll(noteBook.getFolders().stream().map(Folder::getName).collect(Collectors.toList()));
+		foldersComboBox.getItems()
+					   .setAll(noteBook.getFolders().stream().map(Folder::getName).collect(Collectors.toList()));
 		foldersComboBox.getSelectionModel().select(0);
 	}
 
@@ -306,7 +310,9 @@ public class NoteBookWindow extends Application {
 		Button buttonSaveNote = new Button("Save Note");
 		buttonSaveNote.setOnAction(e -> {
 			if (!foldersComboBox.getSelectionModel().isEmpty() && !titleslistView.getSelectionModel().isEmpty())
-				((TextNote)noteBook.getFolders().get(foldersComboBox.getSelectionModel().getSelectedIndex()).getNotes().get(titleslistView.getSelectionModel().getSelectedIndex())).content = textAreaNote.getText();
+				((TextNote) noteBook.getFolders().get(foldersComboBox.getSelectionModel().getSelectedIndex()).getNotes()
+									.get(titleslistView.getSelectionModel()
+													   .getSelectedIndex())).content = textAreaNote.getText();
 			else {
 				Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a folder and a note");
 				alert.showAndWait().ifPresent(type -> {
@@ -326,7 +332,8 @@ public class NoteBookWindow extends Application {
 		Button buttonDeleteNote = new Button("Delete Note");
 		buttonDeleteNote.setOnAction(e -> {
 			if (!foldersComboBox.getSelectionModel().isEmpty() && !titleslistView.getSelectionModel().isEmpty()) {
-				if (noteBook.getFolders().get(foldersComboBox.getSelectionModel().getSelectedIndex()).deleteNote(currentNote)) {
+				if (noteBook.getFolders().get(foldersComboBox.getSelectionModel().getSelectedIndex())
+							.deleteNote(currentNote)) {
 					// What's the point of this being confirmation???
 					Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Your note have been successfully removed");
 					alert.showAndWait();
